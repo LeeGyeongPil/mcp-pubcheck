@@ -1,0 +1,57 @@
+{
+  "name": "mcp-pubcheck",
+  "version": "0.1.0",
+  "description": "Offline pre-publish check: compare built MCP server packages (npm, PyPI, MCPB, OCI) against server.json before you publish.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "mcp-pubcheck": "dist/cli.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "schemas",
+    "examples",
+    "docs/*.md",
+    "THIRD_PARTY_NOTICES.md",
+    "LICENSE",
+    "README.md",
+    "README.ko.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "registry",
+    "server.json",
+    "preflight",
+    "publish",
+    "lint"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/copy-assets.mjs",
+    "prestart": "npm run build",
+    "start": "node dist/cli.js demo",
+    "pretest": "npm run build",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "typescript": "7.0.2",
+    "vitest": "5.1.0"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "mcp-pubcheck",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Offline pre-publish check: compare built MCP server packages (npm, PyPI, MCPB, OCI) against server.json before you publish.",
   "license": "MIT",
   "type": "module",

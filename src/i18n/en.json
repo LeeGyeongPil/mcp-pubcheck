@@ -46,6 +46,7 @@
   "summary.passed": "{n} checks passed",
   "summary.verdict.pass": "Safe to publish as far as these checks can tell.",
   "summary.verdict.fail": "Fix the errors above before you publish.",
+  "summary.verdict.fail-strict": "Warnings fail with --strict. Fix them before you publish.",
   "demo.intro": "This is the bundled practice example (a release with mistakes planted on purpose), not your project.",
   "demo.outro": "Check your own server with: mcp-pubcheck server.json --artifacts dist/",
   "demo.fixed-hint": "The corrected version of this example passes: examples/fixed",

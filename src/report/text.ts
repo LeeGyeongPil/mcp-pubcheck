@@ -5,6 +5,8 @@ import { expectedText, templateParams } from "./json.js";
 export interface TextOptions {
   color: boolean;
   verbose: boolean;
+  /** Treat warnings as failures (mirrors the `--strict` exit code). */
+  strict?: boolean;
 }
 
 const COLORS: Record<string, string> = { error: "31", warn: "33", info: "36", ok: "32" };
@@ -44,8 +46,10 @@ export function renderText(report: Report, lang: Lang, opts: TextOptions): strin
   for (const f of shown) {
     out.push(...block(f, lang, opts), "");
   }
-  const failed = report.summary.errors > 0;
+  const errored = report.summary.errors > 0;
+  const failed = errored || (opts.strict === true && report.summary.warnings > 0);
+  const verdictKey = !failed ? "summary.verdict.pass" : errored ? "summary.verdict.fail" : "summary.verdict.fail-strict";
   out.push(summaryLine(report, lang));
-  out.push(paint(opts, failed ? "error" : "ok", t(lang, failed ? "summary.verdict.fail" : "summary.verdict.pass")));
+  out.push(paint(opts, failed ? "error" : "ok", t(lang, verdictKey)));
   return out.join("\n");
 }

@@ -104,7 +104,7 @@ export async function runCli(argv: string[], env: Record<string, string | undefi
       requireAll: v["require-all"],
     };
     const report = await checkRelease(options);
-    io.out(v.json ? renderJson(report, lang) : renderText(report, lang, textOpts));
+    io.out(v.json ? renderJson(report, lang) : renderText(report, lang, { ...textOpts, strict: v.strict === true }));
     const failed = report.summary.errors > 0 || (v.strict === true && report.summary.warnings > 0);
     return failed ? 1 : 0;
   } catch (e) {

@@ -62,6 +62,21 @@ describe("exit codes", () => {
     expect((await run([...args, "--strict"])).code).toBe(1);
   });
 
+  it("--strict with warnings only prints the failure verdict, not the pass line", async () => {
+    const r = makeRelease(tmpDir(), { mcpbManifestVersion: "1.0.0" });
+    const args = [r.serverJson, "--artifacts", r.artifacts, "--dockerfile", r.dockerfile, "--no-color"];
+    const plain = await run(args);
+    expect(plain.code).toBe(0);
+    expect(plain.out).toContain("Safe to publish as far as these checks can tell.");
+    const strict = await run([...args, "--strict"]);
+    expect(strict.code).toBe(1);
+    expect(strict.out).not.toContain("Safe to publish");
+    expect(strict.out.trimEnd().split("\n").at(-1)).toBe("Warnings fail with --strict. Fix them before you publish.");
+    const ko = await run([...args, "--strict", "--lang", "ko"]);
+    expect(ko.out).not.toContain("게시해도 됩니다");
+    expect(ko.out.trimEnd().split("\n").at(-1)).toBe("--strict 에서는 경고도 실패입니다. 게시하기 전에 경고를 고치세요.");
+  });
+
   it("a missing server.json exits 2 with a helpful message", async () => {
     const r = await run([join(tmpDir(), "nope.json")]);
     expect(r.code).toBe(2);

@@ -46,6 +46,7 @@
   "summary.passed": "통과 {n}건",
   "summary.verdict.pass": "이 검사 기준으로는 게시해도 됩니다.",
   "summary.verdict.fail": "게시하기 전에 위 오류를 고치세요.",
+  "summary.verdict.fail-strict": "--strict 에서는 경고도 실패입니다. 게시하기 전에 경고를 고치세요.",
   "demo.intro": "번들된 연습용 예제(일부러 실수를 심은 릴리스)를 검사합니다. 여러분의 프로젝트가 아닙니다.",
   "demo.outro": "자기 서버는 이렇게 검사하세요: mcp-pubcheck server.json --artifacts dist/",
   "demo.fixed-hint": "이 예제를 고친 판은 통과합니다: examples/fixed",
